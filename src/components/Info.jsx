@@ -9,12 +9,17 @@ export const Info = ({count}) => {
     const date = new Date();
     date.setDate(date.getDate() + count);
     let message = null;
+    const result = date.toDateString();
     switch(count){
         case 0:
             message = `Today is ${date.toDateString()}`;
             break;
         default:
-            message = Math.abs(count) + `${(count > 0) ? ' days from today is ' : ' days ago was '}` + date.toDateString();
+            if(count > 0){
+                message = `${count} ${count === 1 ? 'day' : 'days'} from today will be ${result}`;
+            }else{
+                message = `${-1 * count} ${count === -1 ? 'day' : 'days'} ago was ${result}`;
+            }
     }
     return(
         <DisplayInfo>{message}</DisplayInfo>
